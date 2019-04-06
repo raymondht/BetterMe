@@ -18,6 +18,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { SettingComponent } from './setting/setting.component';
 import {NavigationService} from './Share/Services/navigation.service';
+import {AttributeSliderComponent} from './Tool/attribute-slider/attribute-slider.component';
+import {FeedbackService} from './feedback/feedback.service';
+import {DatabaseService} from './Share/Services/database.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,8 @@ import {NavigationService} from './Share/Services/navigation.service';
     TabMenuComponent,
     SearchComponent,
     FeedbackComponent,
-    SettingComponent
+    SettingComponent,
+    AttributeSliderComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +43,7 @@ import {NavigationService} from './Share/Services/navigation.service';
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [NavigationService],
+  providers: [NavigationService, FeedbackService, DatabaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

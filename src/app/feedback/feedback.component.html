@@ -1,22 +1,63 @@
-<div class="feedback-container px-5 pt-3">
+<div class="feedback-container px-4 pt-3">
   <div *ngIf="!role">
     <h4 class="text-center mt-2 mb-5">Who would you like to give feedback you today?</h4>
     <button type="button" class="btn btn-primary btn-block mb-3" (click)="onSelectRole('students')"  >Student</button>
     <button type="button" class="btn btn-primary btn-block " (click)="onSelectRole('teachers')" >Teacher</button>
   </div>
 
-  <div *ngIf="role" >
-    <div class="user-card row my-3" *ngFor="let user of users">
+  <div *ngIf="role && !selectedId" >
+    <div class="user-card row my-3" *ngFor="let user of users" (click)="selectUser(user.studId)">
       <div class="col-4 p-0">
         <img src="{{user.imageURL}}" height="100%" width="100%" style="border-top-left-radius:12px; border-bottom-left-radius: 12px"/>
       </div>
       <div class="col-8 pl-2 py-2">
-        <strong>Full name: </strong> {{user.name}}<br/>
+        <strong>Full name: </strong> {{user.studName}}<br/>
         <strong>Role: </strong> {{user.role}}<br/>
         <strong>{{user.role == 'student' ? 'Student Id: ': 'Staff Id: '}} </strong> {{user.studId}}
       </div>
     </div>
   </div>
 
+  <div class="feedback-form" *ngIf="receiver">
+    <div class="student-feedback-form text-center" >
+      <h5>{{role === "students"? "Student": "Teacher"}} Feedback Form </h5>
+      <p>Receiver: <strong>{{receiver.studName}}</strong></p>
+      <div class="attribute-area" >
+        <app-attribute-slider
+          [leftLabel]="role === 'students' ? studentAttributeName.contributor : teacherAttributeName.slowPaced"
+          [rightLabel]="role === 'students' ? studentAttributeName.leader : teacherAttributeName.fastPaced"
+        ></app-attribute-slider>
+        <app-attribute-slider
+          [leftLabel]="role === 'students' ? studentAttributeName.independent : teacherAttributeName.oldFashioned"
+          [rightLabel]="role === 'students' ? studentAttributeName.teamPlayer: teacherAttributeName.teachSavvy"
+        ></app-attribute-slider>
+        <app-attribute-slider
+          [leftLabel]="role === 'students' ? studentAttributeName.listener : teacherAttributeName.quietLoud"
+          [rightLabel]="role === 'students' ? studentAttributeName.talker : teacherAttributeName.loud"
+        ></app-attribute-slider>
+        <app-attribute-slider
+          [leftLabel]="role === 'students' ? studentAttributeName.set: teacherAttributeName.laidBack"
+          [rightLabel]="role === 'students' ? studentAttributeName.flexibility: teacherAttributeName.strict"
+        ></app-attribute-slider>
+        <app-attribute-slider
+          [leftLabel]="role === 'students' ? studentAttributeName.calm : teacherAttributeName.preacher"
+          [rightLabel]=" role === 'students' ? studentAttributeName.energetic: teacherAttributeName.collaborator"
+        ></app-attribute-slider>
+      </div>
+    </div>
+
+    <div class="comment-area mt-3">
+      <div class="strength">
+        <label for="strengthComment">Strengths:</label>
+        <textarea class="form-control" id="strengthComment" rows="3" [(ngModel)]="pros"></textarea>
+      </div>
+      <div class="Improvment">
+        <label for="improvementComment">Improvements: </label>
+        <textarea class="form-control" id="improvementComment" rows="3" [(ngModel)]="cons"></textarea>
+      </div>
+    </div>
+    <button class="btn btn-success btn-block mt-2" (click)="submitFeedback()"> Submit </button>
+
+  </div>
 
 </div>

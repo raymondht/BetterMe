@@ -1,1 +1,12 @@
-<h1>User Profile</h1>
+<div class="profile-container">
+  <div class="profile-info mt-3 text-center" *ngIf="student">
+    <img src="{{student.imageURL}}"
+         class="rounded-circle hoverable z-depth-2  mx-auto d-block mb-2"
+         width="150px"
+         height="150px"
+         alt="hoverable" />
+    <h4>{{student.studName}}</h4>
+    <h5>{{student.role}}</h5>
+  </div>
+
+</div>

@@ -2,7 +2,6 @@ import {User} from './user.model';
 
 export class Student extends User {
     constructor(
-      public userId,
       public email,
       public role,
       public studId: number,
@@ -10,7 +9,7 @@ export class Student extends User {
       public studName: string,
       public faculties: string[],
     ) {
-      super(userId, email, role);
+      super(email, role);
     }
 }
 
