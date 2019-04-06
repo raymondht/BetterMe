@@ -21,6 +21,8 @@ import {NavigationService} from './Share/Services/navigation.service';
 import {AttributeSliderComponent} from './Tool/attribute-slider/attribute-slider.component';
 import {FeedbackService} from './feedback/feedback.service';
 import {DatabaseService} from './Share/Services/database.service';
+import {ChartsModule} from 'ng2-charts';
+import { RadarChartComponent } from './Tool/radar-chart/radar-chart.component';
 
 @NgModule({
   declarations: [
@@ -31,12 +33,14 @@ import {DatabaseService} from './Share/Services/database.service';
     SearchComponent,
     FeedbackComponent,
     SettingComponent,
-    AttributeSliderComponent
+    AttributeSliderComponent,
+    RadarChartComponent
   ],
   imports: [
     BrowserModule,
     environment.production ? AngularFireModule.initializeApp(firebaseConfig) : AngularFireModule.initializeApp(firebaseDevConfig),
     AngularFireDatabaseModule,
+    ChartsModule,
     AngularFireAuthModule,
     AppRoutingModule,
     FormsModule,

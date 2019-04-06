@@ -1,11 +1,23 @@
-<div class="feedback-container px-4 pt-3">
+<div class="feedback-container px-4 pt-3 mb-4">
   <div *ngIf="!role">
     <h4 class="text-center mt-2 mb-5">Who would you like to give feedback you today?</h4>
-    <button type="button" class="btn btn-primary btn-block mb-3" (click)="onSelectRole('students')"  >Student</button>
-    <button type="button" class="btn btn-primary btn-block " (click)="onSelectRole('teachers')" >Teacher</button>
+    <button type="button" class="btn orange darken-3 text-white btn-block mb-3" (click)="onSelectRole('students')"  >
+      <i class="fas fa-user-graduate fa-2x mr-3"></i>
+      Student
+    </button>
+    <button type="button" class="btn text-white  yellow darken-3 btn-block " (click)="onSelectRole('teachers')" >
+      <i class="fas fa-chalkboard-teacher fa-2x mr-3"></i>
+      Teacher
+    </button>
   </div>
 
   <div *ngIf="role && !selectedId" >
+    <!-- Search form -->
+    <form class="form-inline md-form form-sm active-purple active-purple-2 mt-2">
+      <i class="fas fa-search" aria-hidden="true"></i>
+      <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search">
+    </form>
+
     <div class="user-card row my-3" *ngFor="let user of users" (click)="selectUser(user.studId)">
       <div class="col-4 p-0">
         <img src="{{user.imageURL}}" height="100%" width="100%" style="border-top-left-radius:12px; border-bottom-left-radius: 12px"/>
@@ -48,11 +60,11 @@
 
     <div class="comment-area mt-3">
       <div class="strength">
-        <label for="strengthComment">Strengths:</label>
+        <label for="strengthComment" > <strong>Strengths:</strong> </label>
         <textarea class="form-control" id="strengthComment" rows="3" [(ngModel)]="pros"></textarea>
       </div>
-      <div class="Improvment">
-        <label for="improvementComment">Improvements: </label>
+      <div class="Improvment mt-2">
+        <label for="improvementComment"><strong>Improvements:</strong> </label>
         <textarea class="form-control" id="improvementComment" rows="3" [(ngModel)]="cons"></textarea>
       </div>
     </div>

@@ -1,0 +1,8 @@
+<div class="radar-chart-container">
+  <canvas baseChart
+          [datasets]="demoradarChartData"
+          [labels]="demoradarChartLabels"
+          [chartType]="radarChartType"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)"></canvas>
+</div>

@@ -39,6 +39,7 @@ export class FeedbackComponent implements OnInit, OnDestroy {
   studentAttributePayload: Attributes = {
     giverId: null,
     receiverId: null,
+    date: null,
     data: {
       contributor: 0,
       leader: 0,
@@ -68,6 +69,7 @@ export class FeedbackComponent implements OnInit, OnDestroy {
   teacherAttributePayload: Attributes = {
     giverId: null,
     receiverId: null,
+    date: null,
     data: {
       contributor: 0,
       leader: 0,
@@ -139,23 +141,31 @@ export class FeedbackComponent implements OnInit, OnDestroy {
   }
 
   submitFeedback() {
+    const date = new Date();
+    const Day = `${date.getMonth() + 1}/${ date.getDate()}/${date.getFullYear()}`;
     if (this.role === 'students') {
       this.studentAttributePayload.giverId = 27439607;
       this.studentAttributePayload.receiverId = this.selectedId;
+      this.studentAttributePayload.date = Day;
       this.dbServ.addAttribute(this.studentAttributePayload);
     } else {
       this.teacherAttributePayload.giverId = 27439607;
       this.teacherAttributePayload.receiverId = this.selectedId;
+      this.teacherAttributePayload.date = Day;
       this.dbServ.addAttribute(this.teacherAttributePayload);
     }
-    this.commentPayload = new UserComment(27439607, this.selectedId, this.pros, this.cons);
+
+
+    this.commentPayload = new UserComment(27439607, this.selectedId, Day, this.pros, this.cons);
     this.dbServ.addComment(this.commentPayload);
     this._location.back();
     this.pros = null;
     this.cons = null;
   }
   ngOnDestroy() {
-    this.onGetUserSub.unsubscribe();
+    if (this.onGetUserSub) {
+      this.onGetUserSub.unsubscribe();
+    }
   }
 
 }

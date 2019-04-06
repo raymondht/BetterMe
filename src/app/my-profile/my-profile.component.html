@@ -9,4 +9,29 @@
     <h5>{{student.role}}</h5>
   </div>
 
+  <div class="divider-new"> Chart </div>
+  <div class="radar-chart" *ngIf="attributeData.length > 0 && student">
+    <app-radar-chart
+      [role]="student.role"
+      [attributeData]="attributeData"
+    ></app-radar-chart>
+  </div>
+
+  <div class="divider-new"> Comments </div>
+  <div *ngIf="comments">
+    <div class="card m-3 " *ngFor="let comment of comments.reverse()" >
+      <h5 class="card-header p-3 text-center deep-purple accent-2  text-white">{{comment.date}}</h5>
+      <div class="card-body">
+        <h6 class="card-title">What you are strong at: </h6>
+        <p class="card-text">{{comment.pros}}</p>
+        <h6 class="card-title">What you can improve on: </h6>
+        <p class="card-text">{{comment.cons}}</p>
+      </div>
+      <div class="card-footer deep-purple accent-2 text-white p-1">
+        <a href="#" class="btn btn-success float-right ">Appreciate</a>
+      </div>
+    </div>
+
+  </div>
+
 </div>

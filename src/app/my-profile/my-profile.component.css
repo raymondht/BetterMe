@@ -1,0 +1,11 @@
+.profile-container{
+  overflow-y: auto;
+}
+.radar-chart{
+  width: 100%;
+}
+.divider{
+  width: 200px;
+  margin: 20px auto;
+  border-top: 2px solid black;
+}

@@ -21,5 +21,8 @@
   text-align: center;
 }
 .nav-item.active a {
-  color: black !important;
+  color: #fdd835 !important;
+}
+.nav-item:focus{
+  outline: none;
 }
