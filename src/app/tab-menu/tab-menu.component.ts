@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {NavigationService} from '../Share/Services/navigation.service';
 
 @Component({
   selector: 'app-tab-menu',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TabMenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(private navServ: NavigationService) { }
 
   ngOnInit() {
+  }
+  onNavigateToPage(pageTitle: string) {
+    this.navServ.onNavigate.next(pageTitle);
   }
 
 }

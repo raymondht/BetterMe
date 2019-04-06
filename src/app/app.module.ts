@@ -14,6 +14,10 @@ import { TabMenuComponent } from './tab-menu/tab-menu.component';
 import {environment} from '../environments/environment';
 import {firebaseConfig, firebaseDevConfig} from '../environments/firebase.config';
 import { SearchComponent } from './Tool/search/search.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FeedbackComponent } from './feedback/feedback.component';
+import { SettingComponent } from './setting/setting.component';
+import {NavigationService} from './Share/Services/navigation.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,9 @@ import { SearchComponent } from './Tool/search/search.component';
     MyProfileComponent,
     HeaderComponent,
     TabMenuComponent,
-    SearchComponent
+    SearchComponent,
+    FeedbackComponent,
+    SettingComponent
   ],
   imports: [
     BrowserModule,
@@ -30,9 +36,10 @@ import { SearchComponent } from './Tool/search/search.component';
     AngularFireAuthModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [NavigationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -7,6 +7,8 @@ import {environment} from '../../environments/environment.prod';
 import {HttpClient} from '@angular/common/http';
 import { UserComment} from '../Share/Models/comment.model';
 import {Attribute} from '../Share/Models/attribute.model';
+import {NavigationService} from '../Share/Services/navigation.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-my-profile',
@@ -19,7 +21,9 @@ export class MyProfileComponent implements OnInit {
   private firebaseCon =  environment.production ? firebaseConfig : firebaseDevConfig;
 
   constructor(private db: AngularFireDatabase,
-              private httpClient: HttpClient ) {
+              private httpClient: HttpClient,
+              private navServ: NavigationService,
+              private router: Router) {
     this.studentRef = db.object('students/-LbkwIR1U8WV4jRIopE2');
     // Use snapshotChanges().map() to store the key
     this.student = this.studentRef.valueChanges().subscribe(
@@ -28,6 +32,8 @@ export class MyProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.navServ.onNavigate.next(this.router.url);
+
     const student = new Student(
       '3243232g',
       'testingEmail',

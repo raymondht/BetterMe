@@ -1,0 +1,22 @@
+<div class="feedback-container px-5 pt-3">
+  <div *ngIf="!role">
+    <h4 class="text-center mt-2 mb-5">Who would you like to give feedback you today?</h4>
+    <button type="button" class="btn btn-primary btn-block mb-3" (click)="onSelectRole('students')"  >Student</button>
+    <button type="button" class="btn btn-primary btn-block " (click)="onSelectRole('teachers')" >Teacher</button>
+  </div>
+
+  <div *ngIf="role" >
+    <div class="user-card row my-3" *ngFor="let user of users">
+      <div class="col-4 p-0">
+        <img src="{{user.imageURL}}" height="100%" width="100%" style="border-top-left-radius:12px; border-bottom-left-radius: 12px"/>
+      </div>
+      <div class="col-8 pl-2 py-2">
+        <strong>Full name: </strong> {{user.name}}<br/>
+        <strong>Role: </strong> {{user.role}}<br/>
+        <strong>{{user.role == 'student' ? 'Student Id: ': 'Staff Id: '}} </strong> {{user.studId}}
+      </div>
+    </div>
+  </div>
+
+
+</div>
