@@ -1,0 +1,21 @@
+.tab-menu-container{
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  padding-bottom: 0;
+}
+
+.tab-menu{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+
+.tab-menu li a {
+  color: white;
+  font-size: 12px;
+}
