@@ -11,6 +11,7 @@ import * as firebase from 'firebase';
 import {DatabaseService} from '../Share/Services/database.service';
 import {Location} from '@angular/common';
 import {Subscription} from 'rxjs';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-feedback',
@@ -84,14 +85,15 @@ export class FeedbackComponent implements OnInit, OnDestroy {
     }
   };
   commentPayload: UserComment;
-  pros: string;
-  cons: string;
+  pros = '';
+  cons = '';
   constructor(private router: Router,
               private navServ: NavigationService,
               private route: ActivatedRoute,
               private db: AngularFireDatabase,
               private feedbackServ: FeedbackService,
               private dbServ: DatabaseService,
+              private snackBar: MatSnackBar,
               private _location: Location) {
   }
 
@@ -143,24 +145,32 @@ export class FeedbackComponent implements OnInit, OnDestroy {
   submitFeedback() {
     const date = new Date();
     const Day = `${date.getMonth() + 1}/${ date.getDate()}/${date.getFullYear()}`;
-    if (this.role === 'students') {
-      this.studentAttributePayload.giverId = 27439607;
-      this.studentAttributePayload.receiverId = this.selectedId;
-      this.studentAttributePayload.date = Day;
-      this.dbServ.addAttribute(this.studentAttributePayload);
+    if (this.pros.replace(/\s/g,"").length > 0 && this.cons.replace(/\s/g,"").length > 0 ){
+      if (this.role === 'students') {
+        this.studentAttributePayload.giverId = 27439607;
+        this.studentAttributePayload.receiverId = this.selectedId;
+        this.studentAttributePayload.date = Day;
+        this.dbServ.addAttribute(this.studentAttributePayload);
+      } else {
+        this.teacherAttributePayload.giverId = 27439607;
+        this.teacherAttributePayload.receiverId = this.selectedId;
+        this.teacherAttributePayload.date = Day;
+        this.dbServ.addAttribute(this.teacherAttributePayload);
+      }
+
+
+      this.commentPayload = new UserComment(27439607, this.selectedId, Day, this.pros, this.cons);
+      this.dbServ.addComment(this.commentPayload);
+      this._location.back();
+      this.pros = null;
+      this.cons = null;
+      this.snackBar.open('Success! Feedback sent', undefined, {
+        duration: 2000
+      });
     } else {
-      this.teacherAttributePayload.giverId = 27439607;
-      this.teacherAttributePayload.receiverId = this.selectedId;
-      this.teacherAttributePayload.date = Day;
-      this.dbServ.addAttribute(this.teacherAttributePayload);
+      alert('Please leave your comments to help the receiver improve');
     }
 
-
-    this.commentPayload = new UserComment(27439607, this.selectedId, Day, this.pros, this.cons);
-    this.dbServ.addComment(this.commentPayload);
-    this._location.back();
-    this.pros = null;
-    this.cons = null;
   }
   ngOnDestroy() {
     if (this.onGetUserSub) {

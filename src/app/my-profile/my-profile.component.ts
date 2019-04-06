@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AngularFireDatabase, AngularFireObject} from "angularfire2/database";
+import {AngularFireDatabase, AngularFireObject, AngularFireList} from "angularfire2/database";
 import {Student} from '../Share/Models/student.model';
 
 import {firebaseConfig, firebaseDevConfig} from "../../environments/firebase.config"
@@ -19,6 +19,7 @@ import {DatabaseService} from '../Share/Services/database.service';
 })
 export class MyProfileComponent implements OnInit {
   studentRef: AngularFireObject<any>;
+  studentsRef: AngularFireList<any>;
   student: Student;
   attributeData = []; // in order;
   comments : UserComment[];
@@ -30,7 +31,9 @@ export class MyProfileComponent implements OnInit {
               private httpClient: HttpClient,
               private navServ: NavigationService,
               private router: Router) {
-    this.studentRef = db.object('students/-LbkwIR1U8WV4jRIopE2');
+    this.studentRef = db.object('students/-LboVFHFOhs-ggmhlTN5');
+    this.studentsRef = db.list('students');
+
     // Get attributes
     this.studentRef.valueChanges().subscribe(
       (student) => {
@@ -47,14 +50,14 @@ export class MyProfileComponent implements OnInit {
     this.navServ.onNavigate.next(this.router.url);
 
     const student = new Student(
-      'testingEmail',
+      'testing@gmail.com',
       'student',
-      27439607,
-      'http://www.atlantichousefm.com/assets/img/CATLEY_LAKEMAN-Russell.jpg',
-      'Steven Rogers',
-      ['falcuty 1', 'falculty 2']
+      27312625,
+      'https://images.askmen.com/1080x540/2016/01/25-021526-facebook_profile_picture_affects_chances_of_getting_hired.jpg',
+      'Tester',
+      ['Faculty of MonHack']
     );
-
+    // this.studentsRef.push(student);
   }
   getAttributes(id: number) {
     this.dbServ.getAttributesObservable(this.student.studId).subscribe(
@@ -83,8 +86,9 @@ export class MyProfileComponent implements OnInit {
   getComments(id: number) {
     this.dbServ.getCommentsObservable(id).subscribe(
       (comments) => {
-        console.log('comments: ', comments);
-        this.comments = comments;
+        if (comments.length > 0) {
+          this.comments = comments.reverse().slice(0, 5);
+        }
       }
     );
   }

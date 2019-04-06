@@ -17,8 +17,8 @@ export class RadarChartComponent implements OnInit {
     if (this.role === 'student') {
       this.demoradarChartLabels = ['contributor', 'leader', 'independent', 'teamPlayer', 'listener',
                                     'talker', 'set', 'flexibility', 'calm', 'energetic' ];
-      this.demoradarChartData =[{data: this.attributeData, label: 'Personal Trait'}] ;
-      console.log(this.attributeData);
+      this.demoradarChartData = [ {data: this.attributeData, label: 'Personal Trait'}] ;
+      console.log('attributes', this.attributeData);
     }
 
   }

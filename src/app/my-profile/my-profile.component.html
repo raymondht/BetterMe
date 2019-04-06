@@ -6,32 +6,44 @@
          height="150px"
          alt="hoverable" />
     <h4>{{student.studName}}</h4>
+    <h5>{{student.faculties.join('and')}}</h5>
     <h5>{{student.role}}</h5>
+    <h6>Constructive feedback giver</h6>
   </div>
 
-  <div class="divider-new"> Chart </div>
-  <div class="radar-chart" *ngIf="attributeData.length > 0 && student">
+  <div class="divider-new "> <strong >Chart </strong></div>
+  <div class="radar-chart" *ngIf="attributeData[0] > 0 && student; else noAttributeDataScreen">
+    <h6 class="text-center">Based on: {{attributeData.length}} feedback</h6>
     <app-radar-chart
       [role]="student.role"
       [attributeData]="attributeData"
     ></app-radar-chart>
   </div>
 
-  <div class="divider-new"> Comments </div>
-  <div *ngIf="comments">
+  <div class="divider-new"> <strong>Comments </strong> </div>
+  <div class="mb-5" *ngIf="comments; else noCommentScreen">
     <div class="card m-3 " *ngFor="let comment of comments.reverse()" >
-      <h5 class="card-header p-3 text-center deep-purple accent-2  text-white">{{comment.date}}</h5>
+      <h5 class="card-header p-3 text-center info-color  text-white">{{comment.date}}</h5>
       <div class="card-body">
         <h6 class="card-title">What you are strong at: </h6>
         <p class="card-text">{{comment.pros}}</p>
         <h6 class="card-title">What you can improve on: </h6>
         <p class="card-text">{{comment.cons}}</p>
       </div>
-      <div class="card-footer deep-purple accent-2 text-white p-1">
+      <div class="card-footer info-color text-white p-1">
         <a href="#" class="btn btn-success float-right ">Appreciate</a>
       </div>
     </div>
-
   </div>
+
+  <ng-template #noAttributeDataScreen>
+    <h5 class="text-center mb-5">No data yet</h5>
+  </ng-template>
+
+  <ng-template  #noCommentScreen>
+    <h5 class="text-center mb-5">No comment yet</h5>
+  </ng-template>
+
+
 
 </div>

@@ -61,11 +61,11 @@
     <div class="comment-area mt-3">
       <div class="strength">
         <label for="strengthComment" > <strong>Strengths:</strong> </label>
-        <textarea class="form-control" id="strengthComment" rows="3" [(ngModel)]="pros"></textarea>
+        <textarea required class="form-control" placeholder="What is this person good at?" id="strengthComment" rows="3" [(ngModel)]="pros"></textarea>
       </div>
       <div class="Improvment mt-2">
         <label for="improvementComment"><strong>Improvements:</strong> </label>
-        <textarea class="form-control" id="improvementComment" rows="3" [(ngModel)]="cons"></textarea>
+        <textarea required class="form-control" placeholder="What can this person improve?" id="improvementComment" rows="3" [(ngModel)]="cons"></textarea>
       </div>
     </div>
     <button class="btn btn-success btn-block mt-2" (click)="submitFeedback()"> Submit </button>

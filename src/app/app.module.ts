@@ -23,6 +23,8 @@ import {FeedbackService} from './feedback/feedback.service';
 import {DatabaseService} from './Share/Services/database.service';
 import {ChartsModule} from 'ng2-charts';
 import { RadarChartComponent } from './Tool/radar-chart/radar-chart.component';
+import {MyProfileService} from './my-profile/my-profile.service';
+import {MatCheckboxModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatSnackBarModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { RadarChartComponent } from './Tool/radar-chart/radar-chart.component';
   ],
   imports: [
     BrowserModule,
+    MatSnackBarModule,
+    MatFormFieldModule, MatSelectModule, MatCheckboxModule, MatInputModule,
     environment.production ? AngularFireModule.initializeApp(firebaseConfig) : AngularFireModule.initializeApp(firebaseDevConfig),
     AngularFireDatabaseModule,
     ChartsModule,
