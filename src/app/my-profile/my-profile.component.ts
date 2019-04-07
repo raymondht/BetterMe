@@ -22,8 +22,9 @@ export class MyProfileComponent implements OnInit {
   studentsRef: AngularFireList<any>;
   student: Student;
   attributeData = []; // in order;
-  comments : UserComment[];
+  comments: UserComment[];
   attributeDataOrder = ['contributor', 'leader', 'independent', 'teamPlayer', 'listener', 'talker', 'set', 'flexibility', 'calm', 'energetic' ];
+  noOfFeedback: number;
   private firebaseCon =  environment.production ? firebaseConfig : firebaseDevConfig;
 
   constructor(private dbServ: DatabaseService,
@@ -62,6 +63,10 @@ export class MyProfileComponent implements OnInit {
   getAttributes(id: number) {
     this.dbServ.getAttributesObservable(this.student.studId).subscribe(
       (attributes) => {
+        this.noOfFeedback = attributes.length;
+        if (this.attributeData.length > 0) {
+          this.attributeData = [];
+        }
         const dataAttributes = attributes.reduce((newArr, attribute) => {
           return newArr.concat(attribute.data);
         }, []);
@@ -80,6 +85,7 @@ export class MyProfileComponent implements OnInit {
         for (let i = 0; i < this.attributeDataOrder.length; i ++) {
           this.attributeData.push(averageObj[this.attributeDataOrder[i]]);
         }
+        console.log('fasd', this.attributeData);
       }
     );
   }

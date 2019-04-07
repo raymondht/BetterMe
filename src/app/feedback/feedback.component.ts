@@ -105,13 +105,13 @@ export class FeedbackComponent implements OnInit, OnDestroy {
         this.dbServ.getUsersObserver(this.role).subscribe(
           (users) => {
             this.receiver ? this.receiver = null : this.receiver = null;
-            this.users = users;
+            this.users = users.filter(user => user.studId !== 27312625);
           }
         );
       } else if (this.role && this.selectedId) {
         this.onGetUserSub = this.dbServ.getUsersObserver(this.role).subscribe(
           (users) => {
-            this.users = users;
+            this.users = users.filter(user => user.studId !== 27312625);
             this.getUser(this.selectedId);
           }
         );

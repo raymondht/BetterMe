@@ -19,8 +19,8 @@ export class AttributeSliderComponent implements OnInit {
     const value = event.target.value;
     const attribute =
       value > 0 ?
-        {targetName: this.rightLabel.toLowerCase(), targetValue: value, nonTargetName: this.leftLabel.toLowerCase(), nonTargetValue: 0}
-        : {targetName: this.leftLabel.toLowerCase(), targetValue: Math.abs(value),  nonTargetName: this.rightLabel.toLowerCase(), nonTargetValue: 0};
+        {targetName: this.rightLabel.toLowerCase(), targetValue: 100 - value, nonTargetName: this.leftLabel.toLowerCase(), nonTargetValue: value}
+        : {targetName: this.leftLabel.toLowerCase(), targetValue: 100 - Math.abs(value),  nonTargetName: this.rightLabel.toLowerCase(), nonTargetValue: Math.abs(value)};
     this.feedbackServ.onAttributeValueChange.next(attribute);
   }
 
