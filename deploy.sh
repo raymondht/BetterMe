@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #Build the angular project
-#npm run build
+npm run build
 
 #Function to get access keys
 #Argument 1: path to credential file

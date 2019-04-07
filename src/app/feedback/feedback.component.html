@@ -15,10 +15,10 @@
     <!-- Search form -->
     <form class="form-inline md-form form-sm active-purple active-purple-2 mt-2">
       <i class="fas fa-search" aria-hidden="true"></i>
-      <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search">
+      <input class="form-control form-control-sm ml-3 w-75" name="searchUser" [(ngModel)]="filterUser" type="text" placeholder="Search" aria-label="Search">
     </form>
 
-    <div class="user-card row my-3" *ngFor="let user of users" (click)="selectUser(user.studId)">
+    <div class="user-card row my-3" *ngFor="let user of users | userFilter: filterUser.toLowerCase(): 'studName' " (click)="selectUser(user.studId)">
       <div class="col-4 p-0">
         <img src="{{user.imageURL}}" height="100%" width="100%" style="border-top-left-radius:12px; border-bottom-left-radius: 12px"/>
       </div>

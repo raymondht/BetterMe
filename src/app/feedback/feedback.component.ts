@@ -87,6 +87,7 @@ export class FeedbackComponent implements OnInit, OnDestroy {
   commentPayload: UserComment;
   pros = '';
   cons = '';
+  filterUser = '';
   constructor(private router: Router,
               private navServ: NavigationService,
               private route: ActivatedRoute,

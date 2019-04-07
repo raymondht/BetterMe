@@ -25,10 +25,12 @@ import {ChartsModule} from 'ng2-charts';
 import { RadarChartComponent } from './Tool/radar-chart/radar-chart.component';
 import {MyProfileService} from './my-profile/my-profile.service';
 import {MatCheckboxModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatSnackBarModule} from '@angular/material';
+import {UserFilterPipe} from './feedback/userFilter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
+    UserFilterPipe,
     MyProfileComponent,
     HeaderComponent,
     TabMenuComponent,
