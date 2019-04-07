@@ -23,16 +23,16 @@ export class MyProfileComponent implements OnInit {
   student: Student;
   attributeData = []; // in order;
   comments: UserComment[];
-  attributeDataOrder = ['contributor', 'leader', 'independent', 'teamPlayer', 'listener', 'talker', 'set', 'flexibility', 'calm', 'energetic' ];
+  attributeDataOrder = ['realistic', 'independent', 'listener', 'dedicated', 'calm',
+                        'optimistic', 'teamplayer', 'speaker', 'flexible', 'energetic' ];
   noOfFeedback: number;
-  private firebaseCon =  environment.production ? firebaseConfig : firebaseDevConfig;
 
   constructor(private dbServ: DatabaseService,
               private db: AngularFireDatabase,
               private httpClient: HttpClient,
               private navServ: NavigationService,
               private router: Router) {
-    this.studentRef = db.object('students/-LboVFHFOhs-ggmhlTN5');
+    this.studentRef = db.object('students/-LboU8dsHcrvy0_BPP7_');
     this.studentsRef = db.list('students');
 
     // Get attributes
@@ -61,8 +61,9 @@ export class MyProfileComponent implements OnInit {
     // this.studentsRef.push(student);
   }
   getAttributes(id: number) {
-    this.dbServ.getAttributesObservable(this.student.studId).subscribe(
+    this.dbServ.getAttributesObservable(id).subscribe(
       (attributes) => {
+        console.log('before', attributes);
         this.noOfFeedback = attributes.length;
         if (this.attributeData.length > 0) {
           this.attributeData = [];

@@ -26,30 +26,30 @@ export class FeedbackComponent implements OnInit, OnDestroy {
   users: any[];
   receiver: any;
   studentAttributeName = {
-    contributor: 'Contributor',
-    leader: 'Leader',
-    independent: 'Independent',
-    teamPlayer: 'Team Player',
-    listener: 'Listener',
-    talker: 'Talker',
-    set: 'Set',
-    flexibility: 'Flexibility',
-    calm: 'Calm',
-    energetic: 'Energetic'
+    attribute1: 'realistic',
+    attribute2: 'optimistic',
+    attribute3: 'independent',
+    attribute4: 'teamPlayer',
+    attribute5: 'listener',
+    attribute6: 'speaker',
+    attribute7: 'dedicated',
+    attribute8: 'flexible',
+    attribute9: 'calm',
+    attribute10: 'energetic'
   };
   studentAttributePayload: Attributes = {
     giverId: null,
     receiverId: null,
     date: null,
     data: {
-      contributor: 0,
-      leader: 0,
+      realistic: 0,
+      optimistic: 0,
       independent: 0,
-      teamPlayer: 0,
+      teamplayer: 0,
       listener: 0,
-      talker: 0,
-      set: 0,
-      flexibility: 0,
+      speaker: 0,
+      dedicated: 0,
+      flexible: 0,
       calm: 0,
       energetic: 0
     }
@@ -75,7 +75,7 @@ export class FeedbackComponent implements OnInit, OnDestroy {
       contributor: 0,
       leader: 0,
       independent: 0,
-      teamPlayer: 0,
+      teamplayer: 0,
       listener: 0,
       talker: 0,
       laidBack: 0,
@@ -127,7 +127,7 @@ export class FeedbackComponent implements OnInit, OnDestroy {
       (attribute: any) => {
         this.studentAttributePayload.data[attribute.targetName] = +attribute.targetValue;
         this.studentAttributePayload.data[attribute.nonTargetName] = +attribute.nonTargetValue;
-        console.log(this.studentAttributePayload);
+        console.log('attribute here: ', this.studentAttributePayload);
       }
     );
   }
@@ -148,19 +148,19 @@ export class FeedbackComponent implements OnInit, OnDestroy {
     const Day = `${date.getMonth() + 1}/${ date.getDate()}/${date.getFullYear()}`;
     if (this.pros.replace(/\s/g,"").length > 0 && this.cons.replace(/\s/g,"").length > 0 ){
       if (this.role === 'students') {
-        this.studentAttributePayload.giverId = 27439607;
+        this.studentAttributePayload.giverId = 27312625;
         this.studentAttributePayload.receiverId = this.selectedId;
         this.studentAttributePayload.date = Day;
         this.dbServ.addAttribute(this.studentAttributePayload);
       } else {
-        this.teacherAttributePayload.giverId = 27439607;
+        this.teacherAttributePayload.giverId = 27312625;
         this.teacherAttributePayload.receiverId = this.selectedId;
         this.teacherAttributePayload.date = Day;
         this.dbServ.addAttribute(this.teacherAttributePayload);
       }
 
 
-      this.commentPayload = new UserComment(27439607, this.selectedId, Day, this.pros, this.cons);
+      this.commentPayload = new UserComment(27312625, this.selectedId, Day, this.pros, this.cons);
       this.dbServ.addComment(this.commentPayload);
       this._location.back();
       this.pros = null;

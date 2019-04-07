@@ -14,8 +14,8 @@
   <div *ngIf="role && !selectedId" >
     <!-- Search form -->
     <form class="form-inline md-form form-sm active-purple active-purple-2 mt-2">
-      <i class="fas fa-search" aria-hidden="true"></i>
-      <input class="form-control form-control-sm ml-3 w-75" name="searchUser" [(ngModel)]="filterUser" type="text" placeholder="Search" aria-label="Search">
+      <i class="fas fa-search fas-2x" aria-hidden="true"></i>
+      <input class="form-control form-control-sm ml-3 w-75" name="searchUser" [(ngModel)]="filterUser" type="text" placeholder="Search name..." aria-label="Name">
     </form>
 
     <div class="user-card row my-3" *ngFor="let user of users | userFilter: filterUser.toLowerCase(): 'studName' " (click)="selectUser(user.studId)">
@@ -36,24 +36,24 @@
       <p>Receiver: <strong>{{receiver.studName}}</strong></p>
       <div class="attribute-area" >
         <app-attribute-slider
-          [leftLabel]="role === 'students' ? studentAttributeName.contributor : teacherAttributeName.slowPaced"
-          [rightLabel]="role === 'students' ? studentAttributeName.leader : teacherAttributeName.fastPaced"
+          [leftLabel]="role === 'students' ? studentAttributeName.attribute1 : teacherAttributeName.slowPaced"
+          [rightLabel]="role === 'students' ? studentAttributeName.attribute2 : teacherAttributeName.fastPaced"
         ></app-attribute-slider>
         <app-attribute-slider
-          [leftLabel]="role === 'students' ? studentAttributeName.independent : teacherAttributeName.oldFashioned"
-          [rightLabel]="role === 'students' ? studentAttributeName.teamPlayer: teacherAttributeName.teachSavvy"
+          [leftLabel]="role === 'students' ? studentAttributeName.attribute3 : teacherAttributeName.oldFashioned"
+          [rightLabel]="role === 'students' ? studentAttributeName.attribute4: teacherAttributeName.teachSavvy"
         ></app-attribute-slider>
         <app-attribute-slider
-          [leftLabel]="role === 'students' ? studentAttributeName.listener : teacherAttributeName.quietLoud"
-          [rightLabel]="role === 'students' ? studentAttributeName.talker : teacherAttributeName.loud"
+          [leftLabel]="role === 'students' ? studentAttributeName.attribute5 : teacherAttributeName.quietLoud"
+          [rightLabel]="role === 'students' ? studentAttributeName.attribute6 : teacherAttributeName.loud"
         ></app-attribute-slider>
         <app-attribute-slider
-          [leftLabel]="role === 'students' ? studentAttributeName.set: teacherAttributeName.laidBack"
-          [rightLabel]="role === 'students' ? studentAttributeName.flexibility: teacherAttributeName.strict"
+          [leftLabel]="role === 'students' ? studentAttributeName.attribute7: teacherAttributeName.laidBack"
+          [rightLabel]="role === 'students' ? studentAttributeName.attribute8: teacherAttributeName.strict"
         ></app-attribute-slider>
         <app-attribute-slider
-          [leftLabel]="role === 'students' ? studentAttributeName.calm : teacherAttributeName.preacher"
-          [rightLabel]=" role === 'students' ? studentAttributeName.energetic: teacherAttributeName.collaborator"
+          [leftLabel]="role === 'students' ? studentAttributeName.attribute9 : teacherAttributeName.preacher"
+          [rightLabel]=" role === 'students' ? studentAttributeName.attribute10 : teacherAttributeName.collaborator"
         ></app-attribute-slider>
       </div>
     </div>
