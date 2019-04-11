@@ -1,0 +1,83 @@
+<div class="feedback-container px-4 pt-3 mb-4">
+  <div *ngIf="!selectedRole">
+    <h4 class="text-center mt-2 mb-5">Who would you like to give feedback to today?</h4>
+    <button type="button" class="btn  indigo accent-4  text-white btn-block mb-3" (click)="onSelectRole('student')"  >
+      <i class="fas fa-user-graduate fa-2x mr-3"></i>
+      Student
+    </button>
+    <button type="button" class="btn text-white  indigo accent-4   btn-block " (click)="onSelectRole('teacher')" >
+      <i class="fas fa-chalkboard-teacher fa-2x mr-3"></i>
+      Teacher
+    </button>
+  </div>
+
+  <div *ngIf="selectedRole && !selectedId" >
+    <!-- Search form -->
+    <form class="form-inline md-form form-sm active-purple active-purple-2 mt-2">
+      <i class="fas fa-search fas-2x" aria-hidden="true"></i>
+      <input class="form-control form-control-sm ml-3 w-75"
+             name="searchUser"
+             [(ngModel)]="filterUser" type="text"
+              placeholder="Search name...">
+    </form>
+    <ng-container *ngIf="users; else loadingUsers">
+      <ng-container *ngIf="users.length > 0; else noUsers">
+        <div class="user-card row my-3" *ngFor="let user of users | userFilter: filterUser.toLowerCase(): 'name' " (click)="selectUser(user.id)">
+          <div class="col-4 p-0">
+            <img src="{{user.imageURL}}" height="100%" width="100%" style="border-top-left-radius:12px; border-bottom-left-radius: 12px"/>
+          </div>
+          <div class="col-8 pl-2 py-2">
+            <strong>Full name: </strong> {{user.name}}<br/>
+            <strong>Role: </strong> {{user.role}}<br/>
+            <strong>{{user.role == 'student' ? 'Student Id: ': 'Staff Id: '}} </strong> {{user.id}}
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+    <ng-template #loadingUsers>Loading users</ng-template>
+    <ng-template #noUsers>No user in this role registered yet</ng-template>
+  </div>
+
+  <div class="feedback-form" *ngIf="receiver">
+    <div class="student-feedback-form text-center" >
+      <h5>{{selectedRole === "student"? "Student": "Teacher"}} Feedback Form </h5>
+      <p>Receiver: <strong>{{receiver.name}}</strong></p>
+      <div class="attribute-area" >
+        <app-attribute-slider
+          [leftLabel]="selectedRole === 'student' ? studentAttributeName[0] : teacherAttributeName[0]"
+          [rightLabel]="selectedRole === 'student' ? studentAttributeName[1]: teacherAttributeName[0]"
+        ></app-attribute-slider>
+        <app-attribute-slider
+          [leftLabel]="selectedRole === 'student' ? studentAttributeName[2]: teacherAttributeName[2]"
+          [rightLabel]="selectedRole === 'student' ? studentAttributeName[3]: teacherAttributeName[3]"
+        ></app-attribute-slider>
+        <app-attribute-slider
+          [leftLabel]="selectedRole === 'student' ? studentAttributeName[4]: teacherAttributeName[4]"
+          [rightLabel]="selectedRole === 'student' ? studentAttributeName[5]: teacherAttributeName[5]"
+        ></app-attribute-slider>
+        <app-attribute-slider
+          [leftLabel]="selectedRole === 'student' ? studentAttributeName[6]: teacherAttributeName[6]"
+          [rightLabel]="selectedRole === 'student' ? studentAttributeName[7]: teacherAttributeName[7]"
+        ></app-attribute-slider>
+        <app-attribute-slider
+          [leftLabel]="selectedRole === 'student' ? studentAttributeName[8] : teacherAttributeName[8]"
+          [rightLabel]="selectedRole === 'student' ? studentAttributeName[9]: teacherAttributeName[9]"
+        ></app-attribute-slider>
+      </div>
+    </div>
+
+    <div class="comment-area mt-3">
+      <div class="strength">
+        <label for="strengthComment" > <strong>Strengths:</strong> </label>
+        <textarea required class="form-control" placeholder="What is this person good at?" id="strengthComment" rows="3" [(ngModel)]="pros"></textarea>
+      </div>
+      <div class="Improvment mt-2">
+        <label for="improvementComment"><strong>Improvements:</strong> </label>
+        <textarea required class="form-control" placeholder="What can this person improve?" id="improvementComment" rows="3" [(ngModel)]="cons"></textarea>
+      </div>
+    </div>
+    <button class="btn btn-success btn-block mt-2" (click)="submitFeedback()"> Submit </button>
+
+  </div>
+
+</div>

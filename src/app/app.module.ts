@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { MyProfileComponent } from './my-profile/my-profile.component';
+import { MyProfileComponent } from './main/my-profile/my-profile.component';
 import {FormsModule} from '@angular/forms';
 import {AppRoutingModule} from './app-routing.module';
 import {AngularFireModule} from "angularfire2";
@@ -15,17 +15,23 @@ import {environment} from '../environments/environment';
 import {firebaseConfig, firebaseDevConfig} from '../environments/firebase.config';
 import { SearchComponent } from './Tool/search/search.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FeedbackComponent } from './feedback/feedback.component';
-import { SettingComponent } from './setting/setting.component';
+import { FeedbackComponent } from './main/feedback/feedback.component';
+import { SettingComponent } from './main/setting/setting.component';
 import {NavigationService} from './Share/Services/navigation.service';
 import {AttributeSliderComponent} from './Tool/attribute-slider/attribute-slider.component';
-import {FeedbackService} from './feedback/feedback.service';
-import {DatabaseService} from './Share/Services/database.service';
+import {FeedbackService} from './main/feedback/feedback.service';
+import {UserService} from './Share/Services/user.service';
 import {ChartsModule} from 'ng2-charts';
 import { RadarChartComponent } from './Tool/radar-chart/radar-chart.component';
-import {MyProfileService} from './my-profile/my-profile.service';
+import {MyProfileService} from './main/my-profile/my-profile.service';
 import {MatCheckboxModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatSnackBarModule} from '@angular/material';
-import {UserFilterPipe} from './feedback/userFilter.pipe';
+import {UserFilterPipe} from './main/feedback/userFilter.pipe';
+import { AuthenticationComponent } from './authentication/authentication.component';
+import { LoginComponent } from './authentication/login/login.component';
+import { SignupComponent } from './authentication/signup/signup.component';
+import {AuthService} from './authentication/auth.service';
+import { MainComponent } from './main/main.component';
+import {MainService} from './main/main.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +44,11 @@ import {UserFilterPipe} from './feedback/userFilter.pipe';
     FeedbackComponent,
     SettingComponent,
     AttributeSliderComponent,
-    RadarChartComponent
+    RadarChartComponent,
+    AuthenticationComponent,
+    LoginComponent,
+    SignupComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +63,7 @@ import {UserFilterPipe} from './feedback/userFilter.pipe';
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [NavigationService, FeedbackService, DatabaseService],
+  providers: [NavigationService, FeedbackService, UserService, AuthService, MainService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

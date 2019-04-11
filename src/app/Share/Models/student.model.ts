@@ -1,15 +1,40 @@
 import {User} from './user.model';
 
 export class Student extends User {
+    static attributeNames = [
+      'realistic', 'optimistic', 'independent', 'teamplayer', 'listener',
+      'speaker', 'dedicated', 'flexible', 'calm', 'energetic'
+    ];
     constructor(
-      public email,
-      public role,
-      public studId: number,
+      public uid: string,
+      public email: string,
+      public name: string,
       public imageURL: string,
-      public studName: string,
-      public faculties: string[],
+      public role: string, // student, teacher
+      public id: number,
+      public faculties: string[]
     ) {
-      super(email, role);
+      super(  uid, email, name, imageURL, role, id, faculties);
+    }
+
+    static fromJson({uid, email, name, imageURL, role, id, faculties}): Student {
+      return new Student(
+        uid,
+        email,
+        name,
+        imageURL,
+        role,
+        id,
+        faculties
+      );
+    }
+
+    static getAttributeDataObj() {
+      const attributeDataObj = {};
+      for (const attributeName of this.attributeNames) {
+        attributeDataObj[attributeName] = 0;
+      }
+      return attributeDataObj;
     }
 }
 

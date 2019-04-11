@@ -1,0 +1,6 @@
+.main-content{
+  height: 100%;
+  margin-top: 65px;
+  margin-bottom: 75px;
+  overflow-y: auto;
+}

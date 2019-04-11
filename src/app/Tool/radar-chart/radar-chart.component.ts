@@ -17,8 +17,8 @@ export class RadarChartComponent implements OnInit, OnChanges {
     if (this.role === 'student') {
       this.demoradarChartLabels = ['Realistic', 'Independent', 'Listener', 'Dedicated', 'Calm',
                                     'Optimistic', 'Team Player', 'Speaker', 'Flexible', 'Energetic' ];
-      this.demoradarChartData = [ {data: this.attributeData, label: 'Personal Trait'}] ;
-      // console.log('attributes', this.attributeData);
+      this.demoradarChartData = [ {data: this.attributeData, label: 'This month'}
+      ] ;
     }
   }
   ngOnChanges() {

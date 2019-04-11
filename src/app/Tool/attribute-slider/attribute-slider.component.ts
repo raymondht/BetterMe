@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, Output} from '@angular/core';
-import {FeedbackService} from '../../feedback/feedback.service';
+import {FeedbackService} from '../../main/feedback/feedback.service';
 declare var $: any;
 
 @Component({
@@ -17,10 +17,11 @@ export class AttributeSliderComponent implements OnInit {
 
   onValueChanged(event) {
     const value = event.target.value;
+    console.log('slider: ', value);
     const attribute =
-      value > 0 ?
-        {targetName: this.rightLabel.toLowerCase(), targetValue: 100 - value, nonTargetName: this.leftLabel.toLowerCase(), nonTargetValue: value}
-        : {targetName: this.leftLabel.toLowerCase(), targetValue: 100 - Math.abs(value),  nonTargetName: this.rightLabel.toLowerCase(), nonTargetValue: Math.abs(value)};
+      value >= 50 ?
+        {targetName: this.rightLabel.toLowerCase(), targetValue: value, nonTargetName: this.leftLabel.toLowerCase(), nonTargetValue: 100 - value}
+        : {targetName: this.leftLabel.toLowerCase(), targetValue: 100 - value,  nonTargetName: this.rightLabel.toLowerCase(), nonTargetValue: value};
     this.feedbackServ.onAttributeValueChange.next(attribute);
   }
 

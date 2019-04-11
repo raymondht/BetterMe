@@ -1,0 +1,98 @@
+<div class="form-container">
+  <form  #fUp="ngForm" (ngSubmit)="onSignUp(fUp)" >
+    <h1 class="text-center primary-text">Sign Up</h1>
+    <div id="userSignUp-data">
+      <div class="form-group">
+        <label for="emailLogin" >Email</label>
+        <div class="input-group">
+          <input type="email"
+                 id="emailLogin"
+                 name="email"
+                 class="form-control"
+                 [ngClass]="{'is-invalid': errorMessage!== '' && errorMessage.search('password') == -1 && fUp.submitted? true: false }"
+                 ngModel
+                 required
+                 email
+                 #userEmail="ngModel" />
+          <div class="invalid-feedback" >
+            {{errorMessage}}
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label for="passwordLogin">Password</label>
+        <div class="input-group">
+          <input type="password"
+                 id="passwordLogin"
+                 name="password"
+                 class="form-control"
+                 [ngClass]="{'is-invalid': errorMessage.search('password') !== -1 ? true: false}"
+                 ngModel
+                 required
+                 #userPassword="ngModel">
+          <div  class="invalid-feedback">
+            {{errorMessage}}
+          </div>
+
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password: </label>
+        <div class="input-group">
+          <input type="password"
+                 id="confirmPassword"
+                 name="confirmPassword"
+                 class="form-control"
+                 [ngClass]="{'is-invalid': isPasswordNotMatched ? true: false}"
+                 ngModel
+                 required
+                 #confirmPasswordValue="ngModel"
+                 (change)="checkConfirmPassword()"
+          >
+          <div [hidden]="confirmPasswordValue.pristine" class="invalid-feedback">
+            {{confirmPasswordValue}}
+            Password Not Matched
+          </div>
+        </div>
+        <!--<span class="form-text error-message" *ngIf="errorMessage !== 'none'  && errorMessage.search('password') !== -1 ">{{errorMessage}}  </span>-->
+      </div>
+
+      <div class="form-group">
+        <label for="role">Are you a student of a teacher?</label>
+        <select id="role" class="custom-select browser-default"
+                [ngClass]="{'is-invalid': isRoleNotSelected ? true: false}" required (change)="onSelectRole($event)">
+          <option value="">Select</option>
+          <option value="student">Student</option>
+          <option value="teacher">Teacher</option>
+        </select>
+        <div class="invalid-feedback">Example invalid custom select feedback</div>
+      </div>
+
+      <div class="form-group">
+        <label for="id" >Your ID: </label>
+        <div class="input-group">
+          <input type="text"
+                 id="id"
+                 name="id"
+                 class="form-control"
+                 [ngClass]=""
+                 ngModel
+                 required
+                 #userEmail="ngModel" />
+          <div class="invalid-feedback">
+            Please choose a unique and valid username.
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <button type="submit" class="login-btn btn btn-block btn-success"  [disabled] = "!fUp.dirty" >Submit</button>
+
+  </form>
+  <!--<div class="col-sm-12 mt-2 text-center">-->
+  <!--<a (click)="changeToSignUp()" style=" text-decoration: underline; cursor: pointer; color: orange">Haven't got a buddy yet? Sign Up to find one! </a>-->
+  <!--</div>-->
+</div>

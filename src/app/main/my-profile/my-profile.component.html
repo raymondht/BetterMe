@@ -1,21 +1,21 @@
 <div class="profile-container">
-  <div class="profile-info mt-3 text-center" *ngIf="student">
-    <img src="{{student.imageURL}}"
+  <div class="profile-info mt-3 text-center" *ngIf="user">
+    <img src="{{user.imageURL}}"
          class="rounded-circle hoverable z-depth-2  mx-auto d-block mb-2"
          width="150px"
          height="150px"
          alt="hoverable" />
-    <h4>{{student.studName}}</h4>
-    <h5>{{student.faculties.join('and')}}</h5>
-    <h5>{{student.role.title}}</h5>
+    <h4>{{user.name}}</h4>
+    <h5>{{user.faculties.join('and')}}</h5>
+    <h5>{{user.role}}</h5>
     <h6><strong>Constructive Feedback:</strong> 2</h6>
   </div>
 
   <div class="divider-new "> <strong >Chart </strong></div>
-  <div class="radar-chart" *ngIf="attributeData.length > 0 && student; else noAttributeDataScreen">
+  <div class="radar-chart" *ngIf="attributeData.length > 0 && user; else noAttributeDataScreen">
     <h6 class="text-center">Based on: {{this.noOfFeedback}} feedback</h6>
     <app-radar-chart
-      [role]="student.role"
+      [role]="user.role"
       [attributeData]="attributeData"
     ></app-radar-chart>
   </div>
