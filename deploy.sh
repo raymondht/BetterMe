@@ -17,7 +17,7 @@ getKey(){
 }
 
 #Bucket name
-bucketName="feedme-monhack"
+bucketName="feedme-monhack.erayus.com"
 
 #Creditial File Path
 credentialFilePath="C:\Users\imrtee\Desktop\AWS\accessKeys.csv"
@@ -31,4 +31,4 @@ export AWS_ACCESS_KEY_ID=$accessKeyID
 export AWS_SECRET_ACCESS_KEY=$secretAccessKey
 
 #Use 'cp --recursive' instead of 'sync' if this is your first deployment
-aws s3 cp --recursive ./dist/FeedMe s3://$bucketName --acl public-read --storage-class REDUCED_REDUNDANCY
+aws s3 cp --recursive ./dist/FeedMe s3://$bucketName --acl public-read --storage-class STANDARD

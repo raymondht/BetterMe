@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {AngularFireDatabase, AngularFireObject, AngularFireList} from "angularfire2/database";
 import {Student} from '../../Share/Models/student.model';
 
@@ -12,6 +12,7 @@ import {Router} from '@angular/router';
 import Database = firebase.database.Database;
 import {UserService} from '../../Share/Services/user.service';
 import {User} from '../../Share/Models/user.model';
+import {Teacher} from '../../Share/Models/teacher.model';
 
 @Component({
   selector: 'app-my-profile',
@@ -36,33 +37,25 @@ export class MyProfileComponent implements OnInit {
     if (!this.userServ.getUser()) {
       this.userServ.onUserInited.subscribe(
         (user: User) => {
-          console.log('weeewewwee: ', user);
+          console.log(user);
           this.user = user;
           // Get attributes
           this.getAttributes(this.user.id);
           // Get comments
           this.getComments(this.user.id);
         }
-      );
+    );
     } else {
       this.user = this.userServ.getUser();
+      // Get attributes
+      this.getAttributes(this.user.id);
+      // Get comments
+      this.getComments(this.user.id);
     }
-
-    //
-    // const student = new Student(
-    //   'raymondhieutran@gmail.com',
-    //   'Raymond Hieu Tran',
-    //   'https://res.cloudinary.com/acloud-guru/image/fetch/w_200,h_200,q_auto,f_auto/https%3A%2F%2Facloudguru-identity-user-photos-production.s3-accelerate.amazonaws.com%2F1540471893156-google-oauth2%257C101282558512192909348-profile.jpg',
-    //   'student',
-    //   27439607,
-    //   ['Faculty of IT']
-    // );
-    // this.usersRef.push(student);
   }
   getAttributes(id: number) {
     this.userServ.getAttributesObservable(id).subscribe(
       (attributes) => {
-        console.log('before', attributes);
         this.noOfFeedback = attributes.length;
         if (this.attributeData.length > 0) {
           this.attributeData = [];

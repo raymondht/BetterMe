@@ -12,6 +12,7 @@ import {Teacher} from '../Models/teacher.model';
 
 export class UserService {
   usersRef: AngularFireList<any>;
+  userRef: AngularFireObject<any>;
   attributesRef: AngularFireList<any>;
   commentsRef: AngularFireList<any>;
   user: User;
@@ -26,17 +27,26 @@ export class UserService {
     return this.usersRef.valueChanges();
   }
   getUserFromDB(uid: string) {
-    this.usersRef.valueChanges().subscribe(
-      (users: User[]) => {
+    const sub = this.usersRef.snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+      )
+    ).subscribe(
+      (users) => {
         const userData = users.filter((user) => user.uid === uid)[0];
-        if (userData.role === 'student') {
-          this.user = Student.fromJson(userData);
-        } else if (userData.role === 'teacher') {
-          this.user = Teacher.fromJson(userData);
-        } else {
-          alert('New Type of User');
-        }
-        this.onUserInited.next(this.user);
+        this.userRef = this.db.object('users/' + userData.key);
+          this.userRef.valueChanges().subscribe(
+          (user: User) => {
+            if (user.role === 'student') {
+              this.user = Student.fromJson(user);
+            } else if (user.role === 'teacher') {
+              this.user = Teacher.fromJson(user);
+            } else {
+              alert('New Type of User');
+            }
+            this.onUserInited.next(user);
+          });
+        sub.unsubscribe();
       }
     );
   }
