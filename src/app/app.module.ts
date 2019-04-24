@@ -32,6 +32,8 @@ import { SignupComponent } from './authentication/signup/signup.component';
 import {AuthService} from './authentication/auth.service';
 import { MainComponent } from './main/main.component';
 import {MainService} from './main/main.service';
+import {AttributeService} from './Share/Services/attribute.service';
+import {CommentService} from './Share/Services/comment.service';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,13 @@ import {MainService} from './main/main.service';
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [NavigationService, FeedbackService, UserService, AuthService, MainService],
+  providers: [NavigationService,
+    FeedbackService,
+    UserService,
+    AuthService,
+    MainService,
+    AttributeService,
+    CommentService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

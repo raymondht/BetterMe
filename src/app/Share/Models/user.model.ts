@@ -12,4 +12,8 @@ export class User {
     const copiedId = this.id;
     return copiedId;
   }
+  getRole() {
+    const copiedRole = this.role;
+    return copiedRole;
+  }
 }

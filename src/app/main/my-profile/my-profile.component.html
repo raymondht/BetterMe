@@ -21,7 +21,7 @@
   </div>
 
   <div class="divider-new"> <strong>Comments </strong> </div>
-  <div class="mb-5" *ngIf="comments; else noCommentScreen">
+  <div class="mb-5" *ngIf="comments.length > 0; else noCommentScreen">
     <div class="card m-3 " *ngFor="let comment of comments.reverse()" >
       <h5 class="card-header p-3 text-center info-color  text-white">{{comment.date}}</h5>
       <div class="card-body">

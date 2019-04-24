@@ -17,7 +17,6 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.af.authState.subscribe(
       res =>  {
-        console.log(res);
         this.userServ.getUserFromDB(res.uid);
       },
       error => console.log(error)

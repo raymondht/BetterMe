@@ -12,6 +12,8 @@ import {UserService} from '../../Share/Services/user.service';
 import {Location} from '@angular/common';
 import {Subscription} from 'rxjs';
 import {MatSnackBar} from '@angular/material';
+import {AttributeService} from '../../Share/Services/attribute.service';
+import {CommentService} from '../../Share/Services/comment.service';
 
 @Component({
   selector: 'app-feedback',
@@ -49,12 +51,12 @@ export class FeedbackComponent implements OnInit, OnDestroy {
   constructor(private router: Router,
               private navServ: NavigationService,
               private route: ActivatedRoute,
-              private db: AngularFireDatabase,
               private feedbackServ: FeedbackService,
-              private dbServ: UserService,
               private snackBar: MatSnackBar,
               private _location: Location,
-              private userServ: UserService
+              private userServ: UserService,
+              private attributeServ: AttributeService,
+              private commentServ: CommentService
   ) {
   }
 
@@ -62,19 +64,19 @@ export class FeedbackComponent implements OnInit, OnDestroy {
     this.route.queryParams.subscribe(params => {
       this.selectedRole = params['role'];
       this.selectedId = +params['id'];
+      const currentUserId = this.userServ.getUserId();
+
       if (this.selectedRole && !this.selectedId) {
-        this.dbServ.getUsersObserver().subscribe(
+        this.onGetUserSub = this.userServ.getUsersObserver().subscribe(
           (users) => {
-            const currentUserId = this.userServ.getUserId();
-            console.log(currentUserId);
-            this.users = users.filter(user => user.id !== 27439607 && user.role === this.selectedRole);
+            this.users = users.filter(user => user.id !== currentUserId && user.role === this.selectedRole);
             console.log(this.users);
           }
         );
       } else if (this.selectedId) {
-        this.onGetUserSub = this.dbServ.getUsersObserver().subscribe(
+        this.onGetUserSub = this.userServ.getUsersObserver().subscribe(
           (users) => {
-            this.users = users.filter(user => user.id !== 27439707 && user.role === this.selectedRole);
+            this.users = users.filter(user => user.id !== currentUserId && user.role === this.selectedRole);
             this.getUser(this.selectedId);
           }
         );
@@ -102,6 +104,7 @@ export class FeedbackComponent implements OnInit, OnDestroy {
 
   getUser(id: number) {
       this.receiver = this.users.filter(user =>  user.id === id )[0];
+      console.log(this.receiver);
   }
 
   submitFeedback() {
@@ -113,15 +116,20 @@ export class FeedbackComponent implements OnInit, OnDestroy {
         this.studentAttributePayload.giverId = 27312625;
         this.studentAttributePayload.receiverId = this.selectedId;
         this.studentAttributePayload.date = Day;
-        this.dbServ.addAttribute(this.studentAttributePayload);
+        this.attributeServ.addAttributes(this.studentAttributePayload, this.receiver.key);
       } else {
         this.teacherAttributePayload.giverId = 27312625;
         this.teacherAttributePayload.receiverId = this.selectedId;
         this.teacherAttributePayload.date = Day;
-        this.dbServ.addAttribute(this.teacherAttributePayload);
+        this.attributeServ.addAttributes(this.teacherAttributePayload, this.receiver.key);
       }
-      this.commentPayload = new UserComment(27312625, this.selectedId, Day, this.pros, this.cons);
-      this.dbServ.addComment(this.commentPayload);
+      // Add comment to the databse
+      const commentData = {
+        pros: this.pros,
+        cons: this.cons
+      };
+      this.commentPayload = new UserComment(27312625, this.selectedId, Day, commentData);
+      this.commentServ.addComment(this.commentPayload, this.receiver.key);
       this._location.back();
       this.pros = null;
       this.cons = null;

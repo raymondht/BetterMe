@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Subject} from 'rxjs';
+import { Subject} from 'rxjs';
 import {AngularFireDatabase, AngularFireList, AngularFireObject} from 'angularfire2/database';
 import {Attributes} from '../Models/attributes.model';
 import {UserComment} from '../Models/comment.model';
@@ -11,20 +11,23 @@ import {Teacher} from '../Models/teacher.model';
 @Injectable()
 
 export class UserService {
-  usersRef: AngularFireList<any>;
-  userRef: AngularFireObject<any>;
-  attributesRef: AngularFireList<any>;
-  commentsRef: AngularFireList<any>;
-  user: User;
+  private usersRef: AngularFireList<any>;
+  private userRef: AngularFireObject<any>;
+  private user: User;
+  private userKey: string;
   onUserInited = new Subject<User>();
+
+
   constructor(private db: AngularFireDatabase) {
-    this.attributesRef = this.db.list('attributes');
-    this.commentsRef = this.db.list('comments');
     this.usersRef = this.db.list('users');
   }
   getUsersObserver() {
     // Use snapshotChanges().map() to store the key
-    return this.usersRef.valueChanges();
+    return  this.usersRef.snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+      )
+    );
   }
   getUserFromDB(uid: string) {
     const sub = this.usersRef.snapshotChanges().pipe(
@@ -34,7 +37,8 @@ export class UserService {
     ).subscribe(
       (users) => {
         const userData = users.filter((user) => user.uid === uid)[0];
-        this.userRef = this.db.object('users/' + userData.key);
+        this.userKey = userData.key;
+        this.userRef = this.db.object('users/' + this.userKey);
           this.userRef.valueChanges().subscribe(
           (user: User) => {
             if (user.role === 'student') {
@@ -50,8 +54,15 @@ export class UserService {
       }
     );
   }
+  getUserKey() {
+    const copiedKey = this.userKey;
+    return copiedKey;
+  }
   getUserId() {
     return this.user.getId();
+  }
+  getRole() {
+    return this.user.getRole();
   }
   getUser() {
     const copiedUser = this.user;
@@ -60,32 +71,6 @@ export class UserService {
 
   addUser(user: User ) {
     this.usersRef.push(user);
-  }
-  addAttribute(attributes: Attributes) {
-    this.attributesRef.push(attributes);
-  }
-  addComment(comment: UserComment) {
-    this.commentsRef.push(comment);
-  }
-
-  // Get attribute that only belongs to the given id
-  getAttributesObservable(id: number) {
-    this.attributesRef = this.db.list(`attributes`);
-    return this.attributesRef.snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-          .filter(attribute => attribute.receiverId === id)
-      )
-    );
-  }
-  getCommentsObservable(id: number) {
-    this.commentsRef = this.db.list(`comments`);
-    return this.commentsRef.snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-          .filter(attribute => attribute.receiverId === id)
-      )
-    );
   }
 
 }
