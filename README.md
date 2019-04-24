@@ -1,27 +1,11 @@
 # FeedMe
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.2.
+### Problems:
+The app addresses the problem where recruiters often have limited time and resources to understand fully an applicant. What the recruiters hear in the interview or see on a resume, a LinkedIn profile is subjective and could be biased or made up. This leads to the risk of their companies missing out hidden talents or hiring people who're not suitable for the company's culture/vision. 
 
-## Development server
+### Solutions: 
+The app will allow the students to build a profile based on anonymous feedback given by teammates in group assignments, hackathons, volunteer events or by their teachers or by their managers at their part-time jobs. 
+Then, the student can choose to share their profile with the recruiters to demonstrate who they are in other people's eyes. No more hard works that will be unrecognized. Moreover, students will also get a better understanding of themselves. 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Demo: 
+http://bit.ly/2Dv9AW5
