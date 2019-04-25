@@ -15,5 +15,4 @@ export class InstructionComponent implements OnInit {
   goToMain() {
     this.router.navigate(['main']);
   }
-
 }

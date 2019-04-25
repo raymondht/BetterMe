@@ -23,6 +23,10 @@ export class User {
     this.imageURL = imageURL;
   }
   addFaculty(faculty: string) {
+    if (!this.faculties) {
+      this.faculties = [];
+    }
     this.faculties.push(faculty);
+    console.log(this.faculties)
   }
 }

@@ -40,9 +40,8 @@ export class SignupComponent implements OnInit {
       this.authServ.signupUser(email, password).then(
         (res) => {
           if (this.selectedRole === 'student') {
-           const student = new Student( res.user.uid, email, '', '', this.selectedRole, id, ['']);
+           const student = new Student( res.user.uid, email, '', '', this.selectedRole, id, []);
            this.userServ.addUser(student);
-           console.log('hey');
            this.router.navigate(['/registration']);
           }
         },
