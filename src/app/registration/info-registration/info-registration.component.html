@@ -1,0 +1,38 @@
+<!-- Default form register -->
+<form #fInfo="ngForm" (ngSubmit)="onInfoRegistered(fInfo)"
+      class="info-registration-form bg-white text-center border border-light p-3 mx-auto z-depth-4">
+
+  <p class="h4 mb-4">Info Registration</p>
+  <div class="form-row mb-4">
+    <label class="label col-12 font-weight-bolder ">What is your name? </label>
+    <div class="col">
+      <!-- First name -->
+      <input type="text"
+             id="firstName"
+             name="firstName"
+             ngModel class="form-control"
+             placeholder="First name">
+    </div>
+    <div class="col">
+      <!-- Last name -->
+      <input type="text" id="lastName"
+             name="lastName"
+             ngModel
+             class="form-control"
+             placeholder="Last name">
+    </div>
+  </div>
+    <div class="form-row mb-4">
+      <label class="label col-12 font-weight-bolder">What faculties are you in? </label>
+      <input id="faculties" name="faculties"
+             ngModel
+             class="form-control"
+             placeholder="e.g Faculty of IT, Faculty of Business">
+  </div>
+
+
+  <!-- Sign up button -->
+  <button class="btn btn-info my-4 btn-block" type="submit">Next</button>
+
+
+</form>

@@ -39,11 +39,11 @@ export class SignupComponent implements OnInit {
       const id = +form.value.id;
       this.authServ.signupUser(email, password).then(
         (res) => {
-          console.log(res);
           if (this.selectedRole === 'student') {
-           const student = new Student( res.user.uid, email, 'Testing', '', this.selectedRole, id, ['Faculty of Testing']);
+           const student = new Student( res.user.uid, email, '', '', this.selectedRole, id, ['']);
            this.userServ.addUser(student);
-           this.router.navigate(['/main']);
+           console.log('hey');
+           this.router.navigate(['/registration']);
           }
         },
         (error) => {
@@ -58,6 +58,8 @@ export class SignupComponent implements OnInit {
     this.selectedRole = event.target.value;
   }
   checkConfirmPassword() {
-
+  }
+  changeToLogIn() {
+    this.router.navigate(['authentication', 'login']);
   }
 }

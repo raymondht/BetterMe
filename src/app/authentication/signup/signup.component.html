@@ -53,7 +53,6 @@
                  (change)="checkConfirmPassword()"
           >
           <div [hidden]="confirmPasswordValue.pristine" class="invalid-feedback">
-            {{confirmPasswordValue}}
             Password Not Matched
           </div>
         </div>
@@ -92,7 +91,7 @@
     <button type="submit" class="login-btn btn btn-block btn-success"  [disabled] = "!fUp.dirty" >Submit</button>
 
   </form>
-  <!--<div class="col-sm-12 mt-2 text-center">-->
-  <!--<a (click)="changeToSignUp()" style=" text-decoration: underline; cursor: pointer; color: orange">Haven't got a buddy yet? Sign Up to find one! </a>-->
-  <!--</div>-->
+  <div class="col-sm-12 mt-2 text-center">
+  <a (click)="changeToLogIn()" style=" text-decoration: underline; cursor: pointer; color: orange">Haven't got a buddy yet? Sign Up to find one! </a>
+  </div>
 </div>

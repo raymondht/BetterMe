@@ -16,4 +16,13 @@ export class User {
     const copiedRole = this.role;
     return copiedRole;
   }
+  updateName(name: string) {
+    this.name = name;
+  }
+  updateImageURL(imageURL: string) {
+    this.imageURL = imageURL;
+  }
+  addFaculty(faculty: string) {
+    this.faculties.push(faculty);
+  }
 }

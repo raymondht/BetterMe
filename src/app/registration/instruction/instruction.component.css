@@ -1,0 +1,10 @@
+.instruction-container{
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  width: 85%;
+  border-radius: 14px;
+  background: white;
+
+}

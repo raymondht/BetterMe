@@ -23,7 +23,6 @@ import {FeedbackService} from './main/feedback/feedback.service';
 import {UserService} from './Share/Services/user.service';
 import {ChartsModule} from 'ng2-charts';
 import { RadarChartComponent } from './Tool/radar-chart/radar-chart.component';
-import {MyProfileService} from './main/my-profile/my-profile.service';
 import {MatCheckboxModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatSnackBarModule} from '@angular/material';
 import {UserFilterPipe} from './main/feedback/userFilter.pipe';
 import { AuthenticationComponent } from './authentication/authentication.component';
@@ -34,6 +33,10 @@ import { MainComponent } from './main/main.component';
 import {MainService} from './main/main.service';
 import {AttributeService} from './Share/Services/attribute.service';
 import {CommentService} from './Share/Services/comment.service';
+import { RegistrationComponent } from './registration/registration.component';
+import { ImageRegistrationComponent } from './registration/image-registration/image-registration.component';
+import { InfoRegistrationComponent } from './registration/info-registration/info-registration.component';
+import { InstructionComponent } from './registration/instruction/instruction.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,11 @@ import {CommentService} from './Share/Services/comment.service';
     AuthenticationComponent,
     LoginComponent,
     SignupComponent,
-    MainComponent
+    MainComponent,
+    RegistrationComponent,
+    ImageRegistrationComponent,
+    InfoRegistrationComponent,
+    InstructionComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,16 @@
 .form-container{
   width: 300px;
   margin: auto;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  color: white;
+}
+
+.ng-invalid:not(form).ng-touched {
+  border-left: 5px solid #a94442; /* red */
+}
+.ng-valid[required], .ng-valid.required.ng-touched {
+  border-left: 5px solid #42A948; /* green */
 }

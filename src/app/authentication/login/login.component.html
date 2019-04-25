@@ -1,5 +1,5 @@
-<div class="form-container">
-  <form  #fIn="ngForm">
+<div class="form-container" >
+  <form  #fIn="ngForm" (ngSubmit)="onLogIn(fIn)">
     <h1 class="text-center primary-text"> Log In</h1>
     <div id="userSignUp-data">
       <div class="form-group">
@@ -49,10 +49,10 @@
         <!--<span class="form-text error-message" *ngIf="errorMessage !== 'none'  && errorMessage.search('password') !== -1 ">{{errorMessage}}  </span>-->
       </div>
     </div>
-    <button type="button" class="login-btn btn btn-block"   [disabled] = "!fIn.dirty" >Log In</button>
+    <button type="submit" class="login-btn btn btn-block btn-success"   [disabled] = "!fIn.dirty" >Log In</button>
 
   </form>
-  <!--<div class="col-sm-12 mt-2 text-center">-->
-    <!--<a (click)="changeToSignUp()" style=" text-decoration: underline; cursor: pointer; color: orange">Haven't got a buddy yet? Sign Up to find one! </a>-->
-  <!--</div>-->
+  <div class="col-sm-12 mt-2 text-center">
+    <a (click)="changeToSignUp()" style=" text-decoration: underline; cursor: pointer; color: orange">Haven't had a profile yet? </a>
+  </div>
 </div>

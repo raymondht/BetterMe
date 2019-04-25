@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {AngularFireDatabase, AngularFireObject, AngularFireList} from "angularfire2/database";
 
 import { UserComment} from '../../Share/Models/comment.model';
 import {Router} from '@angular/router';
@@ -14,8 +13,6 @@ import {CommentService} from '../../Share/Services/comment.service';
   styleUrls: ['./my-profile.component.css']
 })
 export class MyProfileComponent implements OnInit {
-  userRef: AngularFireObject<any>;
-  usersRef: AngularFireList<any>;
   user: User;
   attributeData = []; // in order;
   comments: UserComment[] = [];
@@ -51,8 +48,8 @@ export class MyProfileComponent implements OnInit {
       );
     if (this.userServ.getUser())  {
       this.user = this.userServ.getUser();
-      this.attributeData = this.attributeServ.getAttributes();
       // Get attributes
+      this.attributeData = this.attributeServ.getAttributes();
       // Get comments
       this.comments = this.commentServ.getComments();
     }

@@ -7,6 +7,10 @@ import {AuthenticationComponent} from './authentication/authentication.component
 import {LoginComponent} from './authentication/login/login.component';
 import {SignupComponent} from './authentication/signup/signup.component';
 import {MainComponent} from './main/main.component';
+import {RegistrationComponent} from './registration/registration.component';
+import {InfoRegistrationComponent} from './registration/info-registration/info-registration.component';
+import {ImageRegistrationComponent} from './registration/image-registration/image-registration.component';
+import {InstructionComponent} from './registration/instruction/instruction.component';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: '/authentication/login', pathMatch: 'full'},
@@ -16,12 +20,18 @@ const appRoutes: Routes = [
       {path: '**', redirectTo: '/authentication/login'},
     ]
   },
+  {path: 'registration', component: RegistrationComponent, children: [
+      {path: '', redirectTo: 'info-registration', pathMatch: 'full'},
+      {path: 'info-registration', component: InfoRegistrationComponent},
+      {path: 'image-registration', component: ImageRegistrationComponent},
+      {path: 'instruction', component: InstructionComponent}
+    ]},
   {path: 'main', component: MainComponent, children: [
-      {path: 'home', component: MyProfileComponent},
+      {path: 'profile', component: MyProfileComponent},
       {path: 'feedback', component: FeedbackComponent},
       {path: 'feedback/:role', component: FeedbackComponent},
       {path: 'setting', component: SettingComponent},
-      {path: '', component: MyProfileComponent},
+      {path: '', redirectTo: 'profile', pathMatch: 'full'},
     ]
   }
 ];
