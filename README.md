@@ -7,5 +7,8 @@ The app addresses the problem where recruiters often have limited time and resou
 The app will allow the students to build a profile based on anonymous feedback given by teammates in group assignments, hackathons, volunteer events or by their teachers or by their managers at their part-time jobs. 
 Then, the student can choose to share their profile with the recruiters to demonstrate who they are in other people's eyes. No more hard works that will be unrecognized. Moreover, students will also get a better understanding of themselves. 
 
-## Demo: 
+## Demo Video:
 http://bit.ly/2Dv9AW5
+
+## Testing app:
+https://feedme.erayus.com/
