@@ -24,8 +24,7 @@
       </div>
 
       <div class="form-group">
-
-        <!--<span class="form-text error-message" *ngIf="errorMessage !== 'none'  && errorMessage.search('password') == -1 && fIn.dirty">{{errorMessage}}  </span>-->
+        <span class="form-text error-message text-danger " *ngIf="errorMessage !== 'none'  && errorMessage.search('password') == -1 && fIn.dirty">{{errorMessage}}  </span>
       </div>
       <div class="form-group">
         <label for="passwordLogin">Password</label>
@@ -46,7 +45,7 @@
           </div>
         </div>
 
-        <!--<span class="form-text error-message" *ngIf="errorMessage !== 'none'  && errorMessage.search('password') !== -1 ">{{errorMessage}}  </span>-->
+        <span class="form-text error-message text-danger " *ngIf="errorMessage !== 'none'  && errorMessage.search('password') !== -1 ">{{errorMessage}}  </span>
       </div>
     </div>
     <button type="submit" class="login-btn btn btn-block btn-success"   [disabled] = "!fIn.dirty" >Log In</button>

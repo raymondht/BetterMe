@@ -8,13 +8,16 @@
   width: 85%;
 }
 #uploadImage{
+  width: 0.1px;
+  height: 0.1px;
   opacity: 0;
   overflow: hidden;
   position: absolute;
   z-index: -1;
 }
-label{
-  font-weight: bolder;
-  font-size: 1rem;
-  margin: 0;
-}
+/*}*/
+/*label{*/
+  /*font-weight: bolder;*/
+  /*font-size: 1rem;*/
+  /*margin: 0;*/
+/*}*/

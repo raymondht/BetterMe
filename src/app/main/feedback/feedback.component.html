@@ -22,7 +22,7 @@
     </form>
     <ng-container *ngIf="users; else loadingUsers">
       <ng-container *ngIf="users.length > 0; else noUsers">
-        <div class="user-card row my-3" *ngFor="let user of users | userFilter: filterUser.toLowerCase(): 'name' " (click)="selectUser(user.id)">
+        <div class="user-card row my-3 z-depth-1" *ngFor="let user of users | userFilter: filterUser.toLowerCase(): 'name' " (click)="selectUser(user.id)">
           <div class="col-4 p-0">
             <img src="{{user.imageURL}}" height="100%" width="100%" style="border-top-left-radius:12px; border-bottom-left-radius: 12px"/>
           </div>

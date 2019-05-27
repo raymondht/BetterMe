@@ -1,11 +1,12 @@
 .feedback-container{
   height: auto;
+  padding-top: 75px!important;
+  padding-bottom: 75px!important;
 }
 
 .user-card{
   margin: 0;
   width: 100%;
   height: auto;
-  box-shadow: 0px 2px 2px 1px grey;
   border-radius: 12px;
 }

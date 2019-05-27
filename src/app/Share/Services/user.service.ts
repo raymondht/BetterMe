@@ -50,7 +50,7 @@ export class UserService {
             } else {
               alert('New Type of User');
             }
-            console.log('User in UserService: ', user);
+            // console.log('User in UserService: ', user);
             this.onUserInited.next(user);
           });
       }

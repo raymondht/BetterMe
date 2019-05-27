@@ -14,6 +14,7 @@ import {Subscription} from 'rxjs';
 import {MatSnackBar} from '@angular/material';
 import {AttributeService} from '../../Share/Services/attribute.service';
 import {CommentService} from '../../Share/Services/comment.service';
+import {User} from '../../Share/Models/user.model';
 
 @Component({
   selector: 'app-feedback',
@@ -61,38 +62,40 @@ export class FeedbackComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.selectedRole = params['role'];
-      this.selectedId = +params['id'];
-      const currentUserId = this.userServ.getUserId();
+        this.route.queryParams.subscribe(params => {
+          this.selectedRole = params['role'];
+          this.selectedId = +params['id'];
 
-      if (this.selectedRole && !this.selectedId) {
-        this.onGetUserSub = this.userServ.getUsersObserver().subscribe(
-          (users) => {
-            this.users = users.filter(user => user.id !== currentUserId && user.role === this.selectedRole);
-            console.log(this.users);
+          if (this.selectedRole && !this.selectedId) {
+            this.onGetUserSub = this.userServ.getUsersObserver().subscribe(
+              (users) => {
+                const currentUserId = this.userServ.getUserId();
+                this.users = users.filter(user => user.id !== currentUserId && user.role === this.selectedRole);
+                // console.log(this.users);
+              }
+            );
+          } else if (this.selectedId) {
+            this.onGetUserSub = this.userServ.getUsersObserver().subscribe(
+              (users) => {
+                const currentUserId = this.userServ.getUserId();
+                this.users = users.filter(user => user.id !== currentUserId && user.role === this.selectedRole);
+                this.getUser(this.selectedId);
+              }
+            );
+          } else {
+            this.selectedRole = null;
+            this.receiver = null;
+            this.selectedId = null;
+          }
+        });
+
+        this.feedbackServ.onAttributeValueChange.subscribe(
+          (attribute: any) => {
+            this.studentAttributePayload.data[attribute.targetName] = +attribute.targetValue;
+            this.studentAttributePayload.data[attribute.nonTargetName] = +attribute.nonTargetValue;
           }
         );
-      } else if (this.selectedId) {
-        this.onGetUserSub = this.userServ.getUsersObserver().subscribe(
-          (users) => {
-            this.users = users.filter(user => user.id !== currentUserId && user.role === this.selectedRole);
-            this.getUser(this.selectedId);
-          }
-        );
-      } else {
-        this.selectedRole = null;
-        this.receiver = null;
-        this.selectedId = null;
-      }
-    });
 
-    this.feedbackServ.onAttributeValueChange.subscribe(
-      (attribute: any) => {
-        this.studentAttributePayload.data[attribute.targetName] = +attribute.targetValue;
-        this.studentAttributePayload.data[attribute.nonTargetName] = +attribute.nonTargetValue;
-      }
-    );
   }
 
   onSelectRole(role: string) {
@@ -104,7 +107,7 @@ export class FeedbackComponent implements OnInit, OnDestroy {
 
   getUser(id: number) {
       this.receiver = this.users.filter(user =>  user.id === id )[0];
-      console.log(this.receiver);
+      // console.log(this.receiver);
   }
 
   submitFeedback() {

@@ -28,22 +28,17 @@ export class MyProfileComponent implements OnInit {
       this.userServ.onUserInited.subscribe(
         (user: User) => {
           this.user = user;
-          // Get attributes
-          this.attributeServ.getAttributesFromDB(this.user.role);
-          // Get comments
-          this.commentServ.getCommentsFromDB();
         }
       );
       this.attributeServ.onAttributesReady.subscribe(
         (attributeData: any[]) => {
-          console.log('attribute update');
+          this.noOfFeedback = this.attributeServ.getNumberOfFeedback();
           this.attributeData = attributeData;
         }
       );
       this.commentServ.onCommentsReady.subscribe(
         (comments: UserComment[]) => {
-          console.log('comments update');
-          this.comments = comments;
+          this.comments = comments.reverse();
         }
       );
     if (this.userServ.getUser())  {

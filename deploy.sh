@@ -17,7 +17,7 @@ getKey(){
 }
 
 #Bucket name
-bucketName="feedme-monhack.erayus.com"
+bucketName="feedme.erayus.com"
 
 #Creditial File Path
 credentialFilePath="C:\Users\imrtee\Desktop\AWS\accessKeys.csv"

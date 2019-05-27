@@ -1,4 +1,6 @@
 .profile-container{
+  margin-top: 65px;
+  margin-bottom: 70px;
   overflow-y: auto;
 }
 .radar-chart{

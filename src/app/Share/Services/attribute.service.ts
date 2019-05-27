@@ -14,7 +14,7 @@ import {UserService} from './user.service';
 })
 export class AttributeService {
   attributesRef: AngularFireList<any>;
-  noOfFeedback: number;
+  noOfFeedback = 0;
   attributeData = [];
   studentAttributeDataOrder = [Student.attributeNames[0], Student.attributeNames[2], Student.attributeNames[4], Student.attributeNames[6], Student.attributeNames[8],
     Student.attributeNames[1], Student.attributeNames[3], Student.attributeNames[5], Student.attributeNames[7], Student.attributeNames[9]];
@@ -72,5 +72,10 @@ export class AttributeService {
           }
           this.onAttributesReady.next(this.attributeData);
         });
+    }
+
+    getNumberOfFeedback() {
+      const copiedNoOfFeedback = this.noOfFeedback;
+      return copiedNoOfFeedback;
     }
 }
