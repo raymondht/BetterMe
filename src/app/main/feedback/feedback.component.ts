@@ -107,7 +107,6 @@ export class FeedbackComponent implements OnInit, OnDestroy {
 
   getUser(id: number) {
       this.receiver = this.users.filter(user =>  user.id === id )[0];
-      // console.log(this.receiver);
   }
 
   submitFeedback() {

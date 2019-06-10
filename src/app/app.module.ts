@@ -37,6 +37,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { ImageRegistrationComponent } from './registration/image-registration/image-registration.component';
 import { InfoRegistrationComponent } from './registration/info-registration/info-registration.component';
 import { InstructionComponent } from './registration/instruction/instruction.component';
+import { AWSService } from './Share/Services/AWS.service';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,9 @@ import { InstructionComponent } from './registration/instruction/instruction.com
     AuthService,
     MainService,
     AttributeService,
-    CommentService],
+    CommentService,
+    AWSService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

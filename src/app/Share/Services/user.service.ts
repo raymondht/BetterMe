@@ -1,3 +1,5 @@
+import { AWSService } from './aws.service';
+
 import {Injectable} from '@angular/core';
 import { Subject} from 'rxjs';
 import {AngularFireDatabase, AngularFireList, AngularFireObject} from 'angularfire2/database';
@@ -7,8 +9,6 @@ import {map} from 'rxjs/operators';
 import {Student} from '../Models/student.model';
 import {User} from '../Models/user.model';
 import {Teacher} from '../Models/teacher.model';
-import * as AWS from 'aws-sdk';
-
 
 @Injectable()
 
@@ -19,7 +19,8 @@ export class UserService {
   private userKey: string;
   onUserInited = new Subject<User>();
 
-  constructor(private db: AngularFireDatabase) {
+  constructor(private db: AngularFireDatabase,
+              private awsServ: AWSService) {
     this.usersRef = this.db.list('users');
   }
   getUsersObserver() {
@@ -85,40 +86,16 @@ export class UserService {
 
   uploadUserImage(fileInput) {
     return new Promise((resolve, reject) => {
-      const AWSService = AWS;
-      const region = 'ap-southeast-2';
-      const bucketName = 'feedme-user-images';
-      const IdentityPoolId = 'ap-southeast-2:2671c2c5-2369-4998-9f01-79737f454df3';
       const file = fileInput.target.files[0];
       const fileType = fileInput.target.files[0].type;
-      // Configures the AWS service and initial authorization
-      AWSService.config.update({
-        region: region,
-        credentials: new AWSService.CognitoIdentityCredentials({
-          IdentityPoolId: IdentityPoolId
-        })
-      });
-      // adds the S3 service, make sure the api version and bucket are correct
-      const s3 = new AWSService.S3({
-        apiVersion: '2006-03-01',
-        params: {Bucket: bucketName}
-      });
-      // I store this in a variable for retrieval later
-      s3.upload({
-        Key: file.name,
-        Bucket: bucketName,
-        Body: file,
-        ContentType: fileType,
-        ACL: 'public-read'
-      }, (err, data) => {
-        this.user.updateImageURL(data.Location);
-        this.userRef.update({imageURL: this.user.imageURL});
-        resolve(true);
-        if (err) {
-          reject(err);
+      const bucketName = 'feedme-user-images';
+      this.awsServ.uploadFileToS3Bucket(bucketName, file, fileType).then(
+        (imageURL: string) => {
+          this.user.updateImageURL(imageURL);
+          this.userRef.update({imageURL: this.user.imageURL});
+          resolve(true)
         }
-      });
-    });
-  }
-
+      ).catch((err) => {alert(err)} )
+    })
+  };
 }

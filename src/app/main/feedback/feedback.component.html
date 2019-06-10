@@ -1,4 +1,4 @@
-<div class="feedback-container px-4 pt-3 mb-4">
+<div class="feedback-container px-4 pt-1">
   <div *ngIf="!selectedRole">
     <h4 class="text-center mt-2 mb-5">Who would you like to give feedback to today?</h4>
     <button type="button" class="btn  indigo accent-4  text-white btn-block mb-3" (click)="onSelectRole('student')"  >
@@ -71,7 +71,7 @@
         <label for="strengthComment" > <strong>Strengths:</strong> </label>
         <textarea required class="form-control" placeholder="What is this person good at?" id="strengthComment" rows="3" [(ngModel)]="pros"></textarea>
       </div>
-      <div class="Improvment mt-2">
+      <div class="improvement mt-2">
         <label for="improvementComment"><strong>Improvements:</strong> </label>
         <textarea required class="form-control" placeholder="What can this person improve?" id="improvementComment" rows="3" [(ngModel)]="cons"></textarea>
       </div>
