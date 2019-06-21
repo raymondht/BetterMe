@@ -11,7 +11,7 @@ import * as firebase from 'firebase';
 import {UserService} from '../../Share/Services/user.service';
 import {Location} from '@angular/common';
 import {Subscription} from 'rxjs';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {AttributeService} from '../../Share/Services/attribute.service';
 import {CommentService} from '../../Share/Services/comment.service';
 import {User} from '../../Share/Models/user.model';
