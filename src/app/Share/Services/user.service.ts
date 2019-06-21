@@ -1,5 +1,3 @@
-import { AWSService } from './aws.service';
-
 import {Injectable} from '@angular/core';
 import { Subject} from 'rxjs';
 import {AngularFireDatabase, AngularFireList, AngularFireObject} from 'angularfire2/database';
@@ -9,6 +7,8 @@ import {map} from 'rxjs/operators';
 import {Student} from '../Models/student.model';
 import {User} from '../Models/user.model';
 import {Teacher} from '../Models/teacher.model';
+
+import { AWSService } from './aws.service';
 
 @Injectable()
 

@@ -5,8 +5,8 @@ import * as AWS from 'aws-sdk';
   providedIn: 'root'
 })
 export class AWSService {
-  region;
-  IdentityPoolId;
+  region: string;
+  IdentityPoolId: string;
 
   constructor() {
       this.region = 'ap-southeast-2';
@@ -44,5 +44,5 @@ export class AWSService {
   })
   }
 
-  
+
 }
