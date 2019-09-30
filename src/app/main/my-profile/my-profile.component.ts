@@ -6,6 +6,7 @@ import {UserService} from '../../Share/Services/user.service';
 import {User} from '../../Share/Models/user.model';
 import {AttributeService} from '../../Share/Services/attribute.service';
 import {CommentService} from '../../Share/Services/comment.service';
+import { AWSService } from './../../Share/Services/aws.service';
 
 @Component({
   selector: 'app-my-profile',
@@ -21,7 +22,8 @@ export class MyProfileComponent implements OnInit {
   constructor(private userServ: UserService,
               private attributeServ: AttributeService,
               private commentServ: CommentService,
-              private router: Router) {
+              private router: Router,
+              private awsServ: AWSService) {
   }
 
   ngOnInit() {
@@ -48,5 +50,9 @@ export class MyProfileComponent implements OnInit {
       // Get comments
       this.comments = this.commentServ.getComments();
     }
+  }
+
+  testEmail(){
+    this.awsServ.sendEmail()
   }
 }

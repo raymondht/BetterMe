@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as AWS from 'aws-sdk';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ export class AWSService {
   region: string;
   IdentityPoolId: string;
 
-  constructor() {
+  constructor(private http: HttpClient) {
       this.region = 'ap-southeast-2';
       this.IdentityPoolId = 'ap-southeast-2:2671c2c5-2369-4998-9f01-79737f454df3';
       // Configures the AWS service and initial authorization
@@ -42,6 +43,15 @@ export class AWSService {
       }
     });
   })
+  }
+
+  sendEmail(){
+    this.http.post('https://8wdtpe73z5.execute-api.us-east-1.amazonaws.com/dev', {
+      "subject": "FeedMe Testing",
+      "body": "This is from FeedMe"
+    }).subscribe(
+      (res) => console.log(res)
+    )
   }
 
 
