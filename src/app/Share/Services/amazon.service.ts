@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class AWSService {
+export class AmazonService {
   region: string;
   IdentityPoolId: string;
 

@@ -6,7 +6,7 @@ import {UserService} from '../../Share/Services/user.service';
 import {User} from '../../Share/Models/user.model';
 import {AttributeService} from '../../Share/Services/attribute.service';
 import {CommentService} from '../../Share/Services/comment.service';
-import { AWSService } from './../../Share/Services/aws.service';
+import { AmazonService } from '../../Share/Services/amazon.service';
 
 @Component({
   selector: 'app-my-profile',
@@ -23,8 +23,9 @@ export class MyProfileComponent implements OnInit {
               private attributeServ: AttributeService,
               private commentServ: CommentService,
               private router: Router,
-              private awsServ: AWSService) {
+              private awsServ: AmazonService) {
   }
+
 
   ngOnInit() {
       this.userServ.onUserInited.subscribe(

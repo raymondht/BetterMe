@@ -8,7 +8,7 @@ import {Student} from '../Models/student.model';
 import {User} from '../Models/user.model';
 import {Teacher} from '../Models/teacher.model';
 
-import { AWSService } from './aws.service';
+import { AmazonService } from './amazon.service';
 
 @Injectable()
 
@@ -20,7 +20,7 @@ export class UserService {
   onUserInited = new Subject<User>();
 
   constructor(private db: AngularFireDatabase,
-              private awsServ: AWSService) {
+              private awsServ: AmazonService) {
     this.usersRef = this.db.list('users');
   }
   getUsersObserver() {
