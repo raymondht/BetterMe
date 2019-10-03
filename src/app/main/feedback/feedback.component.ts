@@ -15,6 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import {AttributeService} from '../../Share/Services/attribute.service';
 import {CommentService} from '../../Share/Services/comment.service';
 import {User} from '../../Share/Models/user.model';
+import { AmazonService } from './../../Share/Services/amazon.service';
 
 @Component({
   selector: 'app-feedback',
@@ -57,7 +58,8 @@ export class FeedbackComponent implements OnInit, OnDestroy {
               private _location: Location,
               private userServ: UserService,
               private attributeServ: AttributeService,
-              private commentServ: CommentService
+              private commentServ: CommentService,
+              private awsServ: AmazonService
   ) {
   }
 
@@ -107,6 +109,7 @@ export class FeedbackComponent implements OnInit, OnDestroy {
 
   getUser(id: number) {
       this.receiver = this.users.filter(user =>  user.id === id )[0];
+      console.log(this.receiver);
   }
 
   submitFeedback() {
@@ -125,13 +128,18 @@ export class FeedbackComponent implements OnInit, OnDestroy {
         this.teacherAttributePayload.date = Day;
         this.attributeServ.addAttributes(this.teacherAttributePayload, this.receiver.key);
       }
-      // Add comment to the databse
+      // Add comment to the database
       const commentData = {
         pros: this.pros,
         cons: this.cons
       };
       this.commentPayload = new UserComment(27312625, this.selectedId, Day, commentData);
       this.commentServ.addComment(this.commentPayload, this.receiver.key);
+
+      // Notify the receiver
+      this.awsServ.notifyFeedbackReceiver(this.receiver.email);
+
+      // After send
       this._location.back();
       this.pros = null;
       this.cons = null;

@@ -45,10 +45,9 @@ export class AmazonService {
   })
   }
 
-  sendEmail(){
+  notifyFeedbackReceiver(emailAddress: string){
     const emailData = {
-      subject: "FeedMe Testing",
-      body: "This is from FeedMe"
+      ToAddress: emailAddress
     };
     this.http.post('https://8wdtpe73z5.execute-api.us-east-1.amazonaws.com/dev/', JSON.stringify(emailData)
     ).subscribe(
