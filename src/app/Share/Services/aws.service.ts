@@ -46,12 +46,14 @@ export class AWSService {
   }
 
   sendEmail(){
-    this.http.post('https://8wdtpe73z5.execute-api.us-east-1.amazonaws.com/dev', {
-      "subject": "FeedMe Testing",
-      "body": "This is from FeedMe"
-    }).subscribe(
+    const emailData = {
+      subject: "FeedMe Testing",
+      body: "This is from FeedMe"
+    };
+    this.http.post('https://8wdtpe73z5.execute-api.us-east-1.amazonaws.com/dev/', JSON.stringify(emailData)
+    ).subscribe(
       (res) => console.log(res)
-    )
+    );
   }
 
 
