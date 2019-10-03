@@ -53,7 +53,4 @@ export class MyProfileComponent implements OnInit {
     }
   }
 
-  testEmail(){
-    this.awsServ.sendEmail()
-  }
 }
