@@ -1,4 +1,4 @@
-# FeedMe
+# BetterMe
 
 ### Problems:
 The app addresses the problem where recruiters often have limited time and resources to understand fully an applicant. What the recruiters hear in the interview or see on a resume, a LinkedIn profile is subjective and could be biased or made up. This leads to the risk of their companies missing out hidden talents or hiring people who're not suitable for the company's culture/vision. 
