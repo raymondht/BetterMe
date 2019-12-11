@@ -50,6 +50,7 @@ export class AmazonService {
       toAddress: emailAddress,
       emailName: 'BetterMe',
       subject: 'New Feedback From BetterMe',
+      recipientName: 'BetterMe user',
       message: 'You have received a new feedback from BetterMe. Please login to check.',
       signature: 'BetterMe Team'
     };
