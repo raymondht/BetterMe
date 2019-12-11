@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "npm run build && webotron sync ./dist betterme.erayus.com"
+    "deploy": "npm run build && webotron sync ./dist/feedme betterme.erayus.com"
   },
   "private": true,
   "dependencies": {

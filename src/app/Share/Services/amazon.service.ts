@@ -47,7 +47,11 @@ export class AmazonService {
 
   notifyFeedbackReceiver(emailAddress: string){
     const emailData = {
-      ToAddress: emailAddress
+      toAddress: emailAddress,
+      emailName: 'BetterMe',
+      subject: 'New Feedback From BetterMe',
+      message: 'You have received a new feedback from BetterMe. Please login to check.',
+      signature: 'BetterMe Team'
     };
     this.http.post('https://8wdtpe73z5.execute-api.us-east-1.amazonaws.com/dev/', JSON.stringify(emailData)
     ).subscribe(
